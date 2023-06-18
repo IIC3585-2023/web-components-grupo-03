@@ -1,35 +1,61 @@
-const treeItemTemplate = document.createElement('template');
-treeItemTemplate.innerHTML = /*html*/ `
-  <style>
-  .dropdown-submenu {
-    position: relative;
-  }
+const template = document.createElement('template');
 
-  .dropdown-submenu .dropdown-menu {
-    top: 0;
-    left: 100%;
-    margin-top: -1px;
+template.innerHTML = `
+<style>
+  ul {
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    list-style-position: inside;
+    list-style-type: none;
   }
-  </style>
-  <li><a href="#"></a></li>
+  li {
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+  }
+  li:hover {
+    background-color: rgb(249 250 251);
+  }
+</style>
+<ul>
+  <li></li>
+  <slot></slot>
+</ul>
 `;
-
 
 class TreeItem extends HTMLElement {
   constructor() {
     super();
+    this._shadowRoot = this.attachShadow({ mode: "open" });
+    this._shadowRoot.appendChild(template.content.cloneNode(true));
+    this.liElement = this._shadowRoot.querySelector("li");
+
+    const slot = this._shadowRoot.querySelector("slot");
+    slot.addEventListener("slotchange", this.handleSlotChange.bind(this));
+    
+    this.addEventListener("click", this.toggleVisibility.bind(this));
   }
 
-  connectedCallback() {
-    this.attachShadow({ mode: 'open' });
-    this.shadowRoot.appendChild(treeItemTemplate.content.cloneNode(true));
-    this.update();
+  handleSlotChange(event) {
+    const slot = event.target;
+    const assignedNodes = slot.assignedNodes();
+
+    if (assignedNodes.length > 0 && this.liElement.innerHTML === '') {
+      this.liElement.innerHTML = assignedNodes[0]?.textContent?.trim();
+      assignedNodes[0].textContent = '';
+    }
   }
 
-  update() {
-    this.getAttribute('key') ? this.shadowRoot.querySelector('a').innerHTML = this.getAttribute('key') : '';
-    // this.getAttribute('value') ? this.shadowRoot.querySelector('a').setAttribute('href', this.getAttribute('value')) : '';
+  toggleVisibility(event) {
+    event.stopPropagation(); // Detener la propagación del evento de clic
+
+    const childItems = this.querySelectorAll("tree-item");
+    childItems.forEach((item) => {
+      // Verificar si el elemento secundario es un descendiente directo del elemento actual
+      if (item.parentNode === this) {
+        // Utilizar jQuery para aplicar toggle solo a los elementos secundarios directos
+        $(item).toggle();
+      }
+    });
   }
 }
 
-window.customElements.define('tree-item', TreeItem);
+customElements.define('tree-item', TreeItem);

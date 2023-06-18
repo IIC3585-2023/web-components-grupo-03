@@ -4,22 +4,54 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <script src="./tree-item-generator.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
   <script src="./tree-item.js"></script>
-  <script src="./data.js"></script>
 </head>
 <body>
-  <tree-item-generator></tree-item-generator>
+  <tree-item>
+    Motores de Bases de Datos
+    <tree-item>
+      Relacionales
+      <tree-item>
+        Open Source
+        <tree-item>
+          MySQL 
+        </tree-item>
+        <tree-item>
+          PostgreSQL 
+        </tree-item>
+      </tree-item>
+      <tree-item>
+        Propietarios
+        <tree-item>
+          Oracle
+        </tree-item>
+        <tree-item>
+          SQL Server
+        </tree-item>
+      </tree-item>
+    </tree-item> 
+    <tree-item>
+      NoSQL
+      <tree-item>
+        Modelo Documentos
+        <tree-item>
+          MongoDB
+        </tree-item>
+        <tree-item>
+          CouchDB
+        </tree-item>
+      </tree-item>
+      <tree-item>
+        Modelo Grafos
+        <tree-item>
+          Neo4J
+        </tree-item>
+        <tree-item>
+          SparQL
+        </tree-item>
+      </tree-item>
+    </tree-item>
+  </tree-item>  
 </body>
-<script>
-  $(document).ready(function(){
-    $('.dropdown-submenu a.test').on("click", function(e){
-      $(this).next('ul').toggle();
-      e.stopPropagation();
-      e.preventDefault();
-    });
-  });
-  </script>
 </html>
