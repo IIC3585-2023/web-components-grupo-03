@@ -51,7 +51,7 @@ export default class CardBox extends LitElement {
       <div class="card-img"></div>
       <div class="card-info">
         <p class="text-title">${this.title}</p>
-        <span class="text-title">${currencyFormatter(this.price)}</span>
+        <span class="text-title">${currencyFormatter(this.price - this.price * this.discountPercentage)}</span>
         <span class="old-price">${currencyFormatter(this.price)}</span>
       </div>
       <div class="card-footer">
@@ -75,16 +75,18 @@ export default class CardBox extends LitElement {
     .card {
       width: 190px;
       height: fit-content;
-      padding: .8em;
+      padding: 1.5rem;
       background: #f5f5f5;
       position: relative;
       overflow: visible;
       box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+      border-radius: 1rem;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     }
      
     .card-img {
       background-color: #ffcaa6;
-      height: 250px;
+      height: 200px;
       width: 100%;
       border-radius: .5rem;
       transition: .3s ease;
@@ -110,9 +112,9 @@ export default class CardBox extends LitElement {
      
     /*Text*/
     .text-title {
-      font-weight: 900;
-      font-size: 1.2em;
-      line-height: 1.5;
+      font-weight: 800;
+      font-size: 1.25rem;
+      line-height: 1.75rem;
     }
 
     .old-price {
