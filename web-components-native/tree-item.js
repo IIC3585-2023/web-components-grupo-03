@@ -6,7 +6,8 @@ template.innerHTML = `
     font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     list-style-position: inside;
     list-style-type: none;
-    width: fit-content;
+    width: width: 100%;
+    padding-inline-start: 30px;
   }
   li {
     display: flex;
@@ -47,7 +48,6 @@ class TreeItem extends HTMLElement {
     this.liElement = this._shadowRoot.querySelector("li");
 
     const slot = this._shadowRoot.querySelector("slot");
-    console.log(this.ulElement);
     slot.addEventListener("slotchange", this.handleSlotChange.bind(this));
     
     this.addEventListener("click", this.toggleVisibility.bind(this));

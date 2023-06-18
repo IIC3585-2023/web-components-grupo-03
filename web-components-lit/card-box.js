@@ -48,12 +48,16 @@ export default class CardBox extends LitElement {
     return html`
     <div class="card">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-      <div class="card-img"></div>
+      <div class="discount-tag"> ${Math.round(this.discountPercentage * 100)}% </div>
+      <div class="card-img">
+        <img class= "card-img" src="${this.image}" alt="${this.title}">
+      </div>
       <div class="card-info">
         <p class="text-title">${this.title}</p>
         <span class="text-title">${currencyFormatter(this.price - this.price * this.discountPercentage)}</span>
         <span class="old-price">${currencyFormatter(this.price)}</span>
       </div>
+      <slot></slot>
       <div class="card-footer">
         <div class="rating">
           ${this.showRatingStars()}
@@ -74,6 +78,7 @@ export default class CardBox extends LitElement {
     return css`
     .card {
       width: 190px;
+      margin: 0;
       height: fit-content;
       padding: 1.5rem;
       background: #f5f5f5;
@@ -93,7 +98,7 @@ export default class CardBox extends LitElement {
     }
      
     .card-info {
-      padding-top: 10%;
+      padding-bottom: 10%;
     }
      
     svg {
@@ -146,6 +151,19 @@ export default class CardBox extends LitElement {
      
     .checked {
       color: orange;
+    }
+
+    .discount-tag {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color: #4FC0EC;
+      padding: 5px 10px;
+      margin: 13px;
+      border-radius: 1rem;
+      font-size: 1em;
+      font-weight: 800;
+      color: #fff;
     }
     `;
   }
