@@ -17,9 +17,6 @@ export default class CardBox extends LitElement {
     price: {},
     discountPercentage: {},
     rate: {},
-    address: {},
-    category: {},
-    experience: {},
   };
 
   constructor() {
