@@ -11,9 +11,34 @@ function populateCardMovies(movies) {
     cardBox.setAttribute("rate", movie.rate);
     cardBox.setAttribute("price", movie.price);
     cardBox.setAttribute("discountPercentage", movie.discount/100);
+    cardBox.setAttribute("address", movie.address);
+    cardBox.setAttribute("category", movie.category);
+    cardBox.setAttribute("experience", movie.experience);
+
+    addAditionalInfo(cardBox, movie);
     movieContainer.appendChild(cardBox);
   });
 }
+
+function addAditionalInfo(cardBox, movie) {
+  const tagAddress = document.createElement('span');
+  const tagCategory = document.createElement('span');
+  const tagExperience = document.createElement('span');
+
+  tagAddress.classList.add('movie-tag');
+  tagCategory.classList.add('movie-tag');
+  tagExperience.classList.add('movie-tag');
+
+  tagAddress.innerHTML = movie.address;
+  tagCategory.innerHTML = movie.category;
+  tagExperience.innerHTML = movie.experience;
+
+  cardBox.appendChild(tagAddress);
+  cardBox.appendChild(tagCategory);
+  cardBox.appendChild(tagExperience);
+} 
+  
+
 
 async function getMovies() {
   try {
@@ -26,5 +51,19 @@ async function getMovies() {
   }
 }
 
-console.log("main.js");
 getMovies();
+
+document.addEventListener('click-child', (e) => {
+  const filterBy = e.target.liElement.innerText;
+  const allBoxes = document.querySelectorAll('card-box');
+
+  allBoxes.forEach((box) => {
+    box.style.display = 'none';
+    const tags = box.querySelectorAll('.movie-tag');
+    tags.forEach((tag) => {
+      if (tag.innerText === filterBy || filterBy === 'Todas') {
+        box.style.display = 'block';
+      }
+    })
+  })
+})

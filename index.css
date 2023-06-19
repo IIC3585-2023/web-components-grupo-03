@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.movie-tag {
+    @apply px-3 py-1 text-xs bg-indigo-800 text-white rounded-full mx-1 whitespace-nowrap;
+}

@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+    
   <link href="/dist/output.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
@@ -49,23 +50,21 @@
                 3D
               </tree-item>
             </tree-item>
+            <tree-item>
+              Todas
+            </tree-item>
           </tree-item>
         </nav>
       </div>
     </div>
     <!-- Main Content -->
-    <main class="py-10 lg:pl-72">
+    <main class="flex w-full py-10 lg:pl-72 items-center justify-center">
       <div class="px-4 sm:px-6 lg:px-8">
-        <div class="movie-container flex gap-4">
-
+        <h1 class="text-4xl font-bold text-gray-800">Revisa nuestra cartelera!</h1>
+        <div class="movie-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-10 py-16 items-start justify-center">
         </div>
       </div>
     </main>
   </div>
 </body>
-<style>
-  .movie-container {
-    @apply grid grid-cols-4 gap-4 px-32 py-16;
-  }
-</style>
 </html>

@@ -46,6 +46,13 @@ class TreeItem extends HTMLElement {
     this._shadowRoot.appendChild(template.content.cloneNode(true));
     this.ulElement = this._shadowRoot.querySelector("ul");
     this.liElement = this._shadowRoot.querySelector("li");
+    this.handleClickEvent = new CustomEvent(
+      "click-child", 
+      {
+        bubbles: true,
+        cancelable: false,
+      },
+    );
 
     const slot = this._shadowRoot.querySelector("slot");
     slot.addEventListener("slotchange", this.handleSlotChange.bind(this));
@@ -97,6 +104,11 @@ class TreeItem extends HTMLElement {
         icon.innerHTML = ($(item).css('display') === 'none') ? chevronRightIcon : chevronDownIcon;
       }
     });
+
+    // Disparar evento sólo si el elemento tiene span
+    if (this._shadowRoot.querySelector('slot').assignedNodes()?.length === 1) {
+      this.dispatchEvent(this.handleClickEvent);
+    }
   }
 }
 
